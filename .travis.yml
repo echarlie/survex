@@ -7,9 +7,8 @@ matrix:
         - brew update
       script:
         - brew install https://survex.com/~olly/survex.rb
-        # - brew test https://survex.com/~olly/survex.rb
-        - ls -lR /usr/local/Cellar/survex
-        - cd tests && env CAVERN=/usr/local/bin/cavern DIFFPOS=/usr/local/bin/diffpos SURVEXPORT=/usr/local/bin/survexport VERBOSE=1 ./cavern.tst
+        - brew test https://survex.com/~olly/survex.rb
+        - cd tests && env CAVERN=cavern DIFFPOS=diffpos SURVEXPORT=survexport VERBOSE=1 ./cavern.tst
 branches:
   only:
     - travis-osx
