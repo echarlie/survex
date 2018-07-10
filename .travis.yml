@@ -6,9 +6,8 @@ matrix:
       before_install:
         - brew update
       script:
-        - brew tap survex/homebrew-survex https://git.survex.com/homebrew-survex
-        - brew install survex/homebrew-survex/survex
-        - brew test survex/homebrew-survex/survex
+        - brew install https://survex.com/~olly/survex.rb
+        - brew test https://survex.com/~olly/survex.rb
 branches:
   only:
     - travis-osx
