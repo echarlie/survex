@@ -2,55 +2,13 @@ dist: trusty
 language: cpp
 matrix:
   include:
-    - compiler: gcc
-      os: linux
-      sudo: false
-      addons:
-        apt:
-          packages:
-            - libwxgtk3.0-dev
-            - libavcodec-dev
-            - libavformat-dev
-            - libproj-dev
-            - libswscale-dev
-            - mesa-common-dev
-            - libglu1-mesa-dev
-            - libx11-dev
-            - libxext-dev
-            - ghostscript
-            - netpbm
-            - x11proto-core-dev
-            - liblocale-po-perl
-            - unifont
-            - sgmltools-lite
-            - jadetex
-            - docbook-utils
-            - w3m
-      script:
-        - autoreconf -fiv
-        - ./configure
-        - make
-        - make check VERBOSE=1
     - os: osx
       before_install:
         - brew update
-        - brew install ffmpeg
-        - brew install gettext
-        - brew install gnu-tar
-        - brew install netpbm
-        - brew upgrade proj
-        - brew install wxmac
-        - brew link --force gettext
-        - sudo cpan -T -i local::lib < /dev/null
-        - sudo cpan -I -T -i Locale::PO < /dev/null
-        - echo '[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"' >> ~/.bashrc
       script:
-        - autoreconf -fiv
-        - V=`sed -e 's/^AC_INIT[^,]*, *\[\([^]]*\)\].*/\1/p;d' configure.ac` ; curl https://survex.com/software/$V/survex-$V.tar.gz | gtar --strip-components=1 --skip-old-files -zxf - ; ls -lrt lib ; touch lib/unifont.pixelfont lib/preload_font.h; echo ; ls -lrt doc; touch doc/*.1 doc/manual.txt doc/manual.pdf doc/manual/stampfile
-#        - ./buildmacosx.sh
-        - ./configure
-        - make
-        - make check VERBOSE=1
+        - brew tap survex/homebrew-survex https://git.survex.com/homebrew-survex
+        - brew install survex/homebrew-survex/survex
+        - brew test survex/homebrew-survex/survex
 branches:
   only:
-    - master
+    - travis-osx
